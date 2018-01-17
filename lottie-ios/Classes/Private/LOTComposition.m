@@ -17,7 +17,7 @@
 # pragma mark - Convenience Initializers
 
 + (nullable instancetype)animationNamed:(nonnull NSString *)animationName {
-  return [self animationNamed:animationName inBundle:[NSBundle mainBundle]];
+  return [self animationNamed:animationName inBundle:[NSBundle bundleForClass:self.class]];
 }
 
 + (nullable instancetype)animationNamed:(nonnull NSString *)animationName inBundle:(nonnull NSBundle *)bundle {
@@ -57,7 +57,7 @@
   NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
                                                                          options:0 error:&error] : nil;
   if (JSONObject && !error) {
-    LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject withAssetBundle:[NSBundle mainBundle]];
+    LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject withAssetBundle:[NSBundle bundleForClass:self.class]];
     laScene.rootDirectory = [filePath stringByDeletingLastPathComponent];
     [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
     laScene.cacheKey = animationName;
@@ -69,7 +69,7 @@
 }
 
 + (nonnull instancetype)animationFromJSON:(nonnull NSDictionary *)animationJSON {
-  return [self animationFromJSON:animationJSON inBundle:[NSBundle mainBundle]];
+  return [self animationFromJSON:animationJSON inBundle:[NSBundle bundleForClass:self.class]];
 }
 
 + (nonnull instancetype)animationFromJSON:(nullable NSDictionary *)animationJSON inBundle:(nullable NSBundle *)bundle {

@@ -26,7 +26,7 @@
                        fromLayerNamed:fromLayer
                          toLayerNamed:toLayer
               applyAnimationTransform:applyAnimationTransform
-                             inBundle:[NSBundle mainBundle]];
+                             inBundle:[NSBundle bundleForClass:self.class]];
 }
 
 - (instancetype)initWithAnimationNamed:(NSString *)animation

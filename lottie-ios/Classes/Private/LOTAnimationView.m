@@ -33,7 +33,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
 # pragma mark - Convenience Initializers
 
 + (nonnull instancetype)animationNamed:(nonnull NSString *)animationName {
-  return [self animationNamed:animationName inBundle:[NSBundle mainBundle]];
+  return [self animationNamed:animationName inBundle:[NSBundle bundleForClass:self.class]];
 }
 
 + (nonnull instancetype)animationNamed:(nonnull NSString *)animationName inBundle:(nonnull NSBundle *)bundle {
@@ -42,7 +42,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
 }
 
 + (nonnull instancetype)animationFromJSON:(nonnull NSDictionary *)animationJSON {
-    return [self animationFromJSON:animationJSON inBundle:[NSBundle mainBundle]];
+    return [self animationFromJSON:animationJSON inBundle:[NSBundle bundleForClass:self.class]];
 }
 
 + (nonnull instancetype)animationFromJSON:(nullable NSDictionary *)animationJSON inBundle:(nullable NSBundle *)bundle {
@@ -52,7 +52,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 + (nonnull instancetype)animationWithFilePath:(nonnull NSString *)filePath {
   LOTComposition *comp = [LOTComposition animationWithFilePath:filePath];
-  return [[LOTAnimationView alloc] initWithModel:comp inBundle:[NSBundle mainBundle]];
+  return [[LOTAnimationView alloc] initWithModel:comp inBundle:[NSBundle bundleForClass:self.class]];
 }
 
 # pragma mark - Initializers
@@ -79,7 +79,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
           return;
         }
         
-        LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON withAssetBundle:[NSBundle mainBundle]];
+        LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON withAssetBundle:[NSBundle bundleForClass:self.class]];
         dispatch_async(dispatch_get_main_queue(), ^(void) {
           [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:url.absoluteString];
           laScene.cacheKey = url.absoluteString;
